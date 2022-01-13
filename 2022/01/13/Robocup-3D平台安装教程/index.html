@@ -16,20 +16,21 @@
   <meta name="author" content="YangYJ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="RoboCup3D平台安装一、搭建环境Ubuntu (目前测试成功版本16.04、18.04、20.04 LTS)rcsserver3d 0.7.3simspark 0.3.2  仿真平台搭建环境比较严格，目前只在LTS(long term system)长期支持版本测试成功 二、安装依赖1234567891011121314apt-get install g++apt-get install g">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://example.com/2022/01/09/hello-world/index.html">
+<meta property="og:title" content="Robocup-3D平台安装教程">
+<meta property="og:url" content="http://example.com/2022/01/13/Robocup-3D%E5%B9%B3%E5%8F%B0%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/index.html">
 <meta property="og:site_name" content="电影中的梦">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="RoboCup3D平台安装一、搭建环境Ubuntu (目前测试成功版本16.04、18.04、20.04 LTS)rcsserver3d 0.7.3simspark 0.3.2  仿真平台搭建环境比较严格，目前只在LTS(long term system)长期支持版本测试成功 二、安装依赖1234567891011121314apt-get install g++apt-get install g">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-01-09T08:35:48.746Z">
-<meta property="article:modified_time" content="2022-01-09T08:35:48.746Z">
+<meta property="article:published_time" content="2022-01-13T01:21:32.000Z">
+<meta property="article:modified_time" content="2022-01-13T01:52:10.429Z">
 <meta property="article:author" content="YangYJ">
+<meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>Hello World - 电影中的梦</title>
+  <title>Robocup-3D平台安装教程 - 电影中的梦</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -175,7 +176,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Hello World">
+            <span class="h2" id="subtitle" title="Robocup-3D平台安装教程">
               
             </span>
 
@@ -185,8 +186,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-01-09 16:35" pubdate>
-        2022年1月9日 下午
+      <time datetime="2022-01-13 09:21" pubdate>
+        2022年1月13日 上午
       </time>
     </span>
   
@@ -196,7 +197,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      367 字
+      1.6k 字
     </span>
   
 
@@ -205,7 +206,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4 分钟
+      14 分钟
     </span>
   
 
@@ -242,28 +243,63 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Hello World</h1>
+            <h1 style="display: none">Robocup-3D平台安装教程</h1>
             
             <div class="markdown-body">
-              <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
+              <h1 id="RoboCup3D平台安装"><a href="#RoboCup3D平台安装" class="headerlink" title="RoboCup3D平台安装"></a>RoboCup3D平台安装</h1><h2 id="一、搭建环境"><a href="#一、搭建环境" class="headerlink" title="一、搭建环境"></a>一、搭建环境</h2><p><strong>Ubuntu (目前测试成功版本16.04、18.04、20.04 LTS)</strong><br><br><strong>rcsserver3d 0.7.3</strong><br><br><strong>simspark 0.3.2</strong><br></p>
+<hr>
+<p><em>仿真平台搭建环境比较严格，目前只在LTS(long term system)长期支持版本测试成功</em></p>
+<h2 id="二、安装依赖"><a href="#二、安装依赖" class="headerlink" title="二、安装依赖"></a>二、安装依赖</h2><figure class="highlight javascript"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><pre><code class="hljs javascript">apt-get install g++<br>apt-get install git<br>apt-get install cmake<br>apt-get install libfreetype6-dev<br>apt-get install libode-dev<br>apt-get install libsdl-dev<br>apt-get install ruby<br>apt-get install ruby-dev<br>apt-get install libdevil-dev<br>apt-get install libboost-dev<br>apt-get install libboost-thread-dev<br>apt-get install libboost-regex-dev<br>apt-get install libboost-system-dev<br>apt-get install qt5-<span class="hljs-keyword">default</span><br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
+<h2 id="三、配置GitHub-非第一次用，请忽略"><a href="#三、配置GitHub-非第一次用，请忽略" class="headerlink" title="三、配置GitHub(非第一次用，请忽略)"></a>三、配置GitHub(非第一次用，请忽略)</h2><h3 id="创建SSH-Key-youremail-example-com换成注册GitHub的邮箱"><a href="#创建SSH-Key-youremail-example-com换成注册GitHub的邮箱" class="headerlink" title="创建SSH Key(youremail@example.com换成注册GitHub的邮箱)"></a>创建SSH Key(<code>youremail@example.com</code>换成注册<code>GitHub</code>的邮箱)</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">ssh-keygen -t rsa -C <span class="hljs-string">&quot;youremail@example.com&quot;</span><br></code></pre></td></tr></table></figure>
+<p>将<code>.ssh</code>路径下的<code>id_rsa.pub</code>文件中的密钥添加到 GitHub 上（在GitHub中点击右上角头像 -&gt; Settings，选择 SSH and GPG keys，新建一个ssh keys，复制文件中的密钥进行粘贴）</p>
+<h3 id="检查是否绑定成功"><a href="#检查是否绑定成功" class="headerlink" title="检查是否绑定成功"></a>检查是否绑定成功</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">ssh -T git@github.com<br></code></pre></td></tr></table></figure>
+<h3 id="配置用户名和地址"><a href="#配置用户名和地址" class="headerlink" title="配置用户名和地址"></a>配置用户名和地址</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript">git config --<span class="hljs-built_in">global</span> user.name <span class="hljs-string">&quot;Your Name&quot;</span><br>git config --<span class="hljs-built_in">global</span> user.email <span class="hljs-string">&quot;youremail@example.com&quot;</span><br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
+<h2 id="四、clone源码包"><a href="#四、clone源码包" class="headerlink" title="四、clone源码包"></a>四、clone<a target="_blank" rel="noopener" href="https://gitlab.com/robocup-sim/SimSpark">源码包</a></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">git clone git@github.com:zzufootball/SIMSPARK.git<br></code></pre></td></tr></table></figure>
+<h2 id="五、Install"><a href="#五、Install" class="headerlink" title="五、Install"></a>五、Install</h2><p>打开主目录下的SIMSPARK文件夹，右键打开终端，执行命令：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">./build.sh<br></code></pre></td></tr></table></figure>
+<h2 id="六、Run"><a href="#六、Run" class="headerlink" title="六、Run"></a>六、Run</h2><p>在桌面Ctrl+Alt+T打开终端输入命令：<br>(平台打开则安装成功)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">rcsoccersim3d<br></code></pre></td></tr></table></figure>
+<h2 id="七、更换监视器"><a href="#七、更换监视器" class="headerlink" title="七、更换监视器"></a>七、更换<a target="_blank" rel="noopener" href="https://github.com/magmaOffenburg/RoboViz">监视器</a></h2><h3 id="1、安装JDK-1-8"><a href="#1、安装JDK-1-8" class="headerlink" title="1、安装JDK 1.8"></a>1、安装JDK 1.8</h3><p>打开终端输入命令：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript">sudo apt-cache search jdk<br>sudo apt-get install openjdk-<span class="hljs-number">8</span>-jdk<br></code></pre></td></tr></table></figure>
+<h3 id="2、clone源码包"><a href="#2、clone源码包" class="headerlink" title="2、clone源码包"></a>2、clone源码包</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">git clone https:<span class="hljs-comment">//github.com/magmaOffenburg/RoboViz.git</span><br></code></pre></td></tr></table></figure>
+<p><em>若VM虚拟机网速过慢可以先安装VMware Tools，在Windows系统下载<a target="_blank" rel="noopener" href="https://github.com/magmaOffenburg/RoboViz">源码包</a>再复制到Linux系统中进行解压</em></p>
+<h3 id="3、安装"><a href="#3、安装" class="headerlink" title="3、安装"></a>3、安装</h3><p>打开解压过的Roboviz-master文件夹中的scripts目录，右键打开终端，输入命令：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">./build.sh<br></code></pre></td></tr></table></figure>
+<h3 id="4、更改配置文件"><a href="#4、更改配置文件" class="headerlink" title="4、更改配置文件"></a>4、更改配置文件</h3><p>继续输入命令<code>sudo gedit /usr/local/bin/rcsoccersim3d</code>，打开一个记事本，找到第27行，修改路径将<code>MON</code>路径换成<code>/home/用户名/Roboviz-master/bin/roboviz.sh</code>，接着在第二行加一句<code>cd /home/用户名/Roboviz-master/bin</code>，这里路径中的文件名都要以最新的文件名为标准灵活修改<br></p>
+<h3 id="5、Run"><a href="#5、Run" class="headerlink" title="5、Run"></a>5、Run</h3><p>(重新执行步骤六，这时监视器已换成<code>Roboviz</code>)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">rcsoccersim3d<br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h2 id="更换模式"><a href="#更换模式" class="headerlink" title="更换模式"></a>更换模式</h2><h3 id="切换到优化模式"><a href="#切换到优化模式" class="headerlink" title="切换到优化模式"></a>切换到优化模式</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">./scripts/simspark_optimize_mode.sh<br></code></pre></td></tr></table></figure>
+<h3 id="切换到正常模式"><a href="#切换到正常模式" class="headerlink" title="切换到正常模式"></a>切换到正常模式</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">./scripts/simspark_normal_mode.sh  <br></code></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/magmaOffenburg">magmaOffenburg</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/LARG/utaustinvilla3d">utaustinvilla3d</a></li>
+</ul>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Robocup-3D/">Robocup_3D</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Robocup-3D/Linux/">Linux</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8E%9F%E5%88%9B/">原创</a>
+                    
+                  </div>
                 
               </div>
               
@@ -278,15 +314,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/01/09/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">测试文章</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2022/01/09/Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+                        <span class="hidden-mobile">Github搭建个人博客</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
