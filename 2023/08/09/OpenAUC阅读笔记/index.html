@@ -1,0 +1,548 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="YangYJ">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="OpenAUC: Towards AUC-Oriented Open-Set Recognition一、研究背景图像分类是计算机视觉的基础问题之一。传统的图像分类算法基于封闭集假设，即训练集中的类别标签空间和测试集中的类别标签空间是相同的。但是在很多实际应用中，测试样本中难免会出现训练集中不存在的新类别，这就构成了开放集识别的场景。与封闭集识别不同，开放集识别不仅需要对已知类别进行正确分类，还需要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenAUC阅读笔记">
+<meta property="og:url" content="http://example.com/2023/08/09/OpenAUC%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="电影中的梦">
+<meta property="og:description" content="OpenAUC: Towards AUC-Oriented Open-Set Recognition一、研究背景图像分类是计算机视觉的基础问题之一。传统的图像分类算法基于封闭集假设，即训练集中的类别标签空间和测试集中的类别标签空间是相同的。但是在很多实际应用中，测试样本中难免会出现训练集中不存在的新类别，这就构成了开放集识别的场景。与封闭集识别不同，开放集识别不仅需要对已知类别进行正确分类，还需要">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-09T12:10:42.000Z">
+<meta property="article:modified_time" content="2023-09-28T03:24:35.702Z">
+<meta property="article:author" content="YangYJ">
+<meta property="article:tag" content="原创">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>OpenAUC阅读笔记 - 电影中的梦</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"SDyU8a9obMBJPxY9L4M78Sma-gzGzoHsz","app_key":"yNtcutBypql5GNod5xsWmVhw","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>电影中的梦</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/home.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="OpenAUC阅读笔记">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-08-09 20:10" pubdate>
+        2023年8月9日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">OpenAUC阅读笔记</h1>
+            
+            <div class="markdown-body">
+              <h1 id="OpenAUC-Towards-AUC-Oriented-Open-Set-Recognition"><a href="#OpenAUC-Towards-AUC-Oriented-Open-Set-Recognition" class="headerlink" title="OpenAUC: Towards AUC-Oriented Open-Set Recognition"></a>OpenAUC: Towards AUC-Oriented Open-Set Recognition</h1><h2 id="一、研究背景"><a href="#一、研究背景" class="headerlink" title="一、研究背景"></a>一、研究背景</h2><p>图像分类是计算机视觉的基础问题之一。传统的图像分类算法基于封闭集假设，即训练集中的类别标签空间和测试集中的类别标签空间是相同的。但是在很多实际应用中，测试样本中难免会出现训练集中不存在的新类别，这就构成了开放集识别的场景。与封闭集识别不同，开放集识别不仅需要对已知类别进行正确分类，还需要检测出未知类别的样本。那么在这个更具挑战性的任务下，如何评估模型的性能就成为一个关键问题。</p>
+<p>现有的开放集识别任务中的评估指标主要分为两类:</p>
+<ul>
+<li>一是将分类指标扩展到开放集场景，如Open-set F-score；</li>
+<li>二是将其视为新颖度检测问题，采用AUC指标。</li>
+</ul>
+<p>但是作者通过理论分析指出，这两类指标都存在一定的不一致性，无法很好地反映模型在开放集识别任务上的真实综合性能，因此有必要研究新的评估指标。</p>
+<h2 id="二、工作思路"><a href="#二、工作思路" class="headerlink" title="二、工作思路"></a>二、工作思路</h2><p>将传统的分类指标扩展到开放集识别任务上是最自然的思路。例如Open-set F-score通过引入未知类别，计算已知类别的真正例(TP)、假正例(FP)、假反例(FN)，来综合反映已知类别的精确率和召回率。但是作者指出，这类指标只是通过已知类别的FP和FN来隐式反映未知类别的性能，而未明确考虑未知类别样本的预测结果。因此很容易导致将未知类别样本错误预测到已知类别也可以获得较高的指标值，这与开放集识别的目标不一致。</p>
+<p>另一种思路是将开放集识别视为一个检测新类别样本的新颖度检测问题，采用AUC指标。AUC通过计算已知类别作为正样本，未知类别作为负样本时的真正例率和假正例率曲线下的面积，来评估正负样本的排序能力。但是AUC忽略了对已知类别样本的分类性能。将AUC和已知类别分类精度Acc简单结合，也存在不一致性，因为两者对已知类别和未知类别的性能评估是脱节的。</p>
+<h2 id="三、OpenAUC"><a href="#三、OpenAUC" class="headerlink" title="三、OpenAUC"></a>三、OpenAUC</h2><p>针对现有评估指标的问题，作者提出了一种新的评估指标OpenAUC。其核心思想是同时考虑已知类别样本的分类准确性以及未知类别样本的排名结果，将两者有机结合起来进行综合评估。</p>
+<p>具体来说，OpenAUC指标的值为:在一个已知类别样本被正确分类的前提下，该样本相对于一个未知类别样本的开放集打分的排名结果。如果已知类别样本被正确分类，且其开放集打分低于未知类别样本，则这个已知-未知样本对算作正确预测的样本对。OpenAUC指标计算所有这样的已知-未知样本对中，已知类别样本被正确分类并排名于未知样本之前的比例。</p>
+<p>由此可以看出，OpenAUC指标同时兼顾了对已知类别的准确预测和对未知类别的有效识别。其计算方式确保只有在已知类别样本被准确预测的前提下，未知类别样本的排名结果才会被考虑进来。这避免了现有指标中只关注已知类别或未知类别其中一方面信息的问题。</p>
+<p>作者通过理论分析证明，OpenAUC指标可以避免现有指标中的不一致性问题，更能反映模型在整个开放集识别任务上的真实综合性能。</p>
+<h2 id="四、OpenAUC优化"><a href="#四、OpenAUC优化" class="headerlink" title="四、OpenAUC优化"></a>四、OpenAUC优化</h2><p>为了能够通过Empirical Risk Minimization来学习OpenAUC指标，作者将其形式化为一个可优化的代价函数。具体来说，对于已知样本，首先采用分类损失来保证其被准确预测到对应类别；然后对于未知样本，添加一个AUC损失来优化其相对于已知样本的排名结果。</p>
+<p>由于通常只有已知类别的训练样本，作者采用了manifold mixup的方法生成未知类别样本，以供训练时计算AUC损失。最后的优化目标函数为分类损失与AUC损失的组合，分步骤先优化已知类别预测，再优化未知类别检测。</p>
+<h2 id="五、实验结果"><a href="#五、实验结果" class="headerlink" title="五、实验结果"></a>五、实验结果</h2><p>作者在多个开放集识别基准数据集上进行了实验，与多个state-of-the-art方法进行比较。结果显示，所提出的OpenAUC指标和优化方法可以帮助模型获得最优的OpenAUC指标值，同时也取得非常竞争的已知类别分类精度。这验证了OpenAUC指标和优化算法的有效性。</p>
+<p>另外，作者还通过实验展示了采用OpenAUC指标可以避免现有指标中识别已知类别和未知类别脱节的问题。总体来说，本文对开放集识别任务的评估指标进行了有益的扩展和完善。</p>
+<h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><ul>
+<li>我们对OSR的现有指标进行了详细分析。理论结果表明，现有的指标，包括基于分类的指标和AUC，由于其自身的局限性，本质上与OSR的目标不一致。</li>
+<li>提出了一种新的度量，称为OpenAUC。OpenAUC克服了现有度量标准的限制，从而摆脱了不一致的特性。</li>
+<li>提出了一种端到端学习方法来优化OpenAUC，在多个基准数据集上的实证结果验证了该方法的有效性。</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%A7%91%E7%A0%94/">科研</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%A7%91%E7%A0%94/%E6%96%87%E7%8C%AE%E7%AC%94%E8%AE%B0/">文献笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8E%9F%E5%88%9B/">原创</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/08/09/DeepCluster%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">DeepCluster阅读笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/18/5-12%E6%97%85%E6%B8%B8%E5%B0%8F%E8%AE%B0/">
+                        <span class="hidden-mobile">5.12旅游小记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"SDyU8a9obMBJPxY9L4M78Sma-gzGzoHsz","appKey":"yNtcutBypql5GNod5xsWmVhw","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

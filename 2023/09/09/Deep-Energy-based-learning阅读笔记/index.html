@@ -1,0 +1,552 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="YangYJ">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Deep Energy-Based Learning on Unordered Point Sets for 3D Generation， Reconstruction and Classification一、研究背景点云作为一种标准的三维数据获取格式，在自动驾驶中的激光雷达、Xbox的Kinect以及手机人脸识别传感器中都有大量应用。与其他三维格式如体素和网格相比，点云可以以更紧凑和详细的方式表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deep_Energy_based_learning阅读笔记">
+<meta property="og:url" content="http://example.com/2023/09/09/Deep-Energy-based-learning%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="电影中的梦">
+<meta property="og:description" content="Deep Energy-Based Learning on Unordered Point Sets for 3D Generation， Reconstruction and Classification一、研究背景点云作为一种标准的三维数据获取格式，在自动驾驶中的激光雷达、Xbox的Kinect以及手机人脸识别传感器中都有大量应用。与其他三维格式如体素和网格相比，点云可以以更紧凑和详细的方式表">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-09T07:40:33.000Z">
+<meta property="article:modified_time" content="2023-09-28T03:26:21.582Z">
+<meta property="article:author" content="YangYJ">
+<meta property="article:tag" content="原创">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>Deep_Energy_based_learning阅读笔记 - 电影中的梦</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"SDyU8a9obMBJPxY9L4M78Sma-gzGzoHsz","app_key":"yNtcutBypql5GNod5xsWmVhw","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>电影中的梦</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/home.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Deep_Energy_based_learning阅读笔记">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-09-09 15:40" pubdate>
+        2023年9月9日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Deep_Energy_based_learning阅读笔记</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Deep-Energy-Based-Learning-on-Unordered-Point-Sets-for-3D-Generation，-Reconstruction-and-Classification"><a href="#Deep-Energy-Based-Learning-on-Unordered-Point-Sets-for-3D-Generation，-Reconstruction-and-Classification" class="headerlink" title="Deep Energy-Based Learning on Unordered Point Sets for 3D Generation， Reconstruction and Classification"></a>Deep Energy-Based Learning on Unordered Point Sets for 3D Generation， Reconstruction and Classification</h1><h2 id="一、研究背景"><a href="#一、研究背景" class="headerlink" title="一、研究背景"></a>一、研究背景</h2><p>点云作为一种标准的三维数据获取格式，在自动驾驶中的激光雷达、Xbox的Kinect以及手机人脸识别传感器中都有大量应用。与其他三维格式如体素和网格相比，点云可以以更紧凑和详细的方式表示三维对象的几何信息。学习点云的生成模型对三维计算机视觉具有基础性作用，因为它可以显式地建模点云数据的概率分布，这有助于点云合成和下游分析任务。</p>
+<p>尽管在点云分类和分割等判别模型方面有了巨大进展，但是点云的生成模型研究还比较缓慢。点云生成任务的主要挑战在于，点云是无序点的集合，与图像、视频和体数据等具有固定结构的表示不同，这使得很难直接把现有针对结构化数据的方法扩展到点云上。因此，目前的三维生成模型研究主要还是基于体数据表示。</p>
+<p>随着近年来图像和视频生成模型的成功，研究者开始关注点云的生成问题。现有的点云生成方法主要基于GAN、VAE或编码器-解码器框架，并采用手工设计的倒角距离或推土距离等度量来衡量两个点集之间的差异。这些方法都存在一定的局限性。本文提出了一个基于最大似然估计的能量模型来生成点云，该模型可以避免训练GAN或VAE的复杂性，也不需要设计点云相似度度量。</p>
+<h2 id="二、方法"><a href="#二、方法" class="headerlink" title="二、方法"></a>二、方法</h2><h3 id="1-基于能量的点集模型"><a href="#1-基于能量的点集模型" class="headerlink" title="1. 基于能量的点集模型"></a>1. 基于能量的点集模型</h3><p>假设观测到来自特定类别的一组三维形状数据{X1， …， XN}，其中每个形状由一组三维点表示，即X = {x1， …， xM}，这里xk表示第k个点的坐标信息。目标是学习这个点云集合的概率分布模型。</p>
+<p>文章提出了以下基于能量的模型来表示点云X的概率密度:</p>
+<p>pθ(X) = 1/Z(θ) exp[fθ(X)] p0(X)</p>
+<p>其中fθ(X)是一个由输入不变的底层神经网络参数化的评分函数;p0(X)为高斯白噪声分布作为参考分布;Z(θ)为归一化常数。</p>
+<p>由于每个点云输入X本质上是无序点的集合，为了使得定义在点集上的能量函数Eθ(X)对点的输入顺序不变，文章通过在集合中的非线性变换点上应用对称函数来设计fθ(X)，即fθ({x1， …， xM}) = g({h(x1)， ..， h(xM)})，其中h由多层感知器网络参数化，g是一个对称函数，它是一个平均池化函数后跟一个多层感知器网络。</p>
+<h3 id="2-最大似然估计"><a href="#2-最大似然估计" class="headerlink" title="2. 最大似然估计"></a>2. 最大似然估计</h3><p>给定观测到的点云数据集合X，学习的目标是最大化数据的对数似然，这与最小化X和模型分布的KL散度等价。</p>
+<p>可以采用MCMC来近似求解难以直接计算的模型期望，并通过梯度上升更新模型参数。具体在每次迭代中，从训练数据中随机采样一批真实点云，同时基于当前模型采样一批合成点云，然后计算这两批点云的模型参数梯度差作为更新方向。</p>
+<p>文章采用了Langevin动力学进行MCMC采样。MCMC初始化有以下三个选项：</p>
+<ol>
+<li>从噪声点云中初始化长期非持续性MCMC。</li>
+<li>从噪声点云中初始化持续性MCMC，并在每个后续的学习迭代中，从前一个学习迭代中生成的合成点云开始运行有限步长的MCMC。</li>
+<li>根据对比散度，可以在每个学习迭代中从训练数据集中采样的训练示例中初始化MCMC。</li>
+</ol>
+<h3 id="3-短程MCMC作为生成器模型"><a href="#3-短程MCMC作为生成器模型" class="headerlink" title="3. 短程MCMC作为生成器模型"></a>3. 短程MCMC作为生成器模型</h3><p>由于学习的目标分布pθ通常是多模的，要使不同链的MCMC采样混合需花费很长时间。为了加速训练，文章采用了一种从固定的噪声分布(如高斯白噪声)初始化，运行固定步数的非收敛短程MCMC链。</p>
+<p>这可以看作是一个生成器模型或流模型，定义为:</p>
+<p>X = Mθ(Z， ξ)， Z ∼ p0(Z)</p>
+<p>其中Z为噪声样本，Mθ表示包含K步Langevin动力学的短程MCMC，ξ表示噪声项。</p>
+<p>这种短程MCMC学习的目标变成了矩匹配，匹配真实数据分布和模型分布在特征函数上的期望。即使学习到的是偏置近似，但这个短程MCMC仍然是一个有效的生成器，既可以用于生成，也可以用于重建。</p>
+<p>给定一个测试点云，可以通过优化latent变量Z来最小化重建误差。</p>
+<h2 id="三、实验结果"><a href="#三、实验结果" class="headerlink" title="三、实验结果"></a>三、实验结果</h2><p>在ModelNet10数据集上进行了点云的生成、重建、插值和分类的实验。</p>
+<ol>
+<li>生成结果的质量与GAN和流模型接近或超过，验证了模型的生成能力。</li>
+<li>短程MCMC实现了重建，结果优于VAE基线。</li>
+<li>在潜空间进行插值，平滑的过渡和物理上合理的中间生成示例表明生成器学习了平滑的潜在空间用于点云嵌入。</li>
+<li>无监督预训练的点编码可用于分类，结果与其他方法相当。</li>
+<li>对不同形式的点云损坏进行分类测试，表明模型的鲁棒性。</li>
+<li>通过可视化点编码函数的过滤器响应，不同层的不同滤波器学习检测不同形状区域中的点。较高层次的滤波器通常比较低层次的滤波器检测到形状更复杂的区域中的点。</li>
+</ol>
+<h2 id="四、结论"><a href="#四、结论" class="headerlink" title="四、结论"></a>四、结论</h2><p>本文研究了基于深度能量的无序三维点云建模与学习方法。提出了一种基于能量模型的三维点云的概率密度，它是无序的点集，其中能量函数是由输入置换不变深度神经网络参数化的。该模型可以通过基于mcmc的最大似然学习进行训练，而不需要招募任何其他辅助网络。学习过程遵循“综合分析”方案。实验表明，该模型可用于三维图像的生成、重建、解释和分类。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%A7%91%E7%A0%94/">科研</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%A7%91%E7%A0%94/%E6%96%87%E7%8C%AE%E7%AC%94%E8%AE%B0/">文献笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8E%9F%E5%88%9B/">原创</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/09/DeepCluster%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">
+                        <span class="hidden-mobile">DeepCluster阅读笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"SDyU8a9obMBJPxY9L4M78Sma-gzGzoHsz","appKey":"yNtcutBypql5GNod5xsWmVhw","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
