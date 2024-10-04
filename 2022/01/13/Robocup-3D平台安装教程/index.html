@@ -1,0 +1,559 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="YangYJ">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="RoboCup3D平台安装一、搭建环境Ubuntu (目前测试成功版本16.04、18.04、20.04 LTS)rcsserver3d 0.7.3simspark 0.3.2  仿真平台搭建环境比较严格，目前只在LTS(long term system)长期支持版本测试成功 二、安装依赖1234567891011121314apt-get install g++apt-get install g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Robocup-3D平台安装教程">
+<meta property="og:url" content="http://example.com/2022/01/13/Robocup-3D%E5%B9%B3%E5%8F%B0%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="电影中的梦">
+<meta property="og:description" content="RoboCup3D平台安装一、搭建环境Ubuntu (目前测试成功版本16.04、18.04、20.04 LTS)rcsserver3d 0.7.3simspark 0.3.2  仿真平台搭建环境比较严格，目前只在LTS(long term system)长期支持版本测试成功 二、安装依赖1234567891011121314apt-get install g++apt-get install g">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-13T01:21:32.000Z">
+<meta property="article:modified_time" content="2022-01-13T01:52:12.000Z">
+<meta property="article:author" content="YangYJ">
+<meta property="article:tag" content="原创">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>Robocup-3D平台安装教程 - 电影中的梦</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"SDyU8a9obMBJPxY9L4M78Sma-gzGzoHsz","app_key":"yNtcutBypql5GNod5xsWmVhw","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="电影中的梦" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>电影中的梦</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/home.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Robocup-3D平台安装教程">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-13 09:21" pubdate>
+        2022年1月13日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      undefined 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      NaN 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Robocup-3D平台安装教程</h1>
+            
+            <div class="markdown-body">
+              <h1 id="RoboCup3D平台安装"><a href="#RoboCup3D平台安装" class="headerlink" title="RoboCup3D平台安装"></a>RoboCup3D平台安装</h1><h2 id="一、搭建环境"><a href="#一、搭建环境" class="headerlink" title="一、搭建环境"></a>一、搭建环境</h2><p><strong>Ubuntu (目前测试成功版本16.04、18.04、20.04 LTS)</strong><br><br><strong>rcsserver3d 0.7.3</strong><br><br><strong>simspark 0.3.2</strong><br></p>
+<hr>
+<p><em>仿真平台搭建环境比较严格，目前只在LTS(long term system)长期支持版本测试成功</em></p>
+<h2 id="二、安装依赖"><a href="#二、安装依赖" class="headerlink" title="二、安装依赖"></a>二、安装依赖</h2><figure class="highlight javascript"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><pre><code class="hljs javascript">apt-get install g++<br>apt-get install git<br>apt-get install cmake<br>apt-get install libfreetype6-dev<br>apt-get install libode-dev<br>apt-get install libsdl-dev<br>apt-get install ruby<br>apt-get install ruby-dev<br>apt-get install libdevil-dev<br>apt-get install libboost-dev<br>apt-get install libboost-thread-dev<br>apt-get install libboost-regex-dev<br>apt-get install libboost-system-dev<br>apt-get install qt5-<span class="hljs-keyword">default</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="三、配置GitHub-非第一次用，请忽略"><a href="#三、配置GitHub-非第一次用，请忽略" class="headerlink" title="三、配置GitHub(非第一次用，请忽略)"></a>三、配置GitHub(非第一次用，请忽略)</h2><h3 id="创建SSH-Key-youremail-example-com换成注册GitHub的邮箱"><a href="#创建SSH-Key-youremail-example-com换成注册GitHub的邮箱" class="headerlink" title="创建SSH Key(youremail@example.com换成注册GitHub的邮箱)"></a>创建SSH Key(<code>youremail@example.com</code>换成注册<code>GitHub</code>的邮箱)</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">ssh-keygen -t rsa -C <span class="hljs-string">&quot;youremail@example.com&quot;</span><br></code></pre></td></tr></table></figure>
+<p>将<code>.ssh</code>路径下的<code>id_rsa.pub</code>文件中的密钥添加到 GitHub 上（在GitHub中点击右上角头像 -&gt; Settings，选择 SSH and GPG keys，新建一个ssh keys，复制文件中的密钥进行粘贴）</p>
+<h3 id="检查是否绑定成功"><a href="#检查是否绑定成功" class="headerlink" title="检查是否绑定成功"></a>检查是否绑定成功</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">ssh -T git@github.<span class="hljs-property">com</span><br></code></pre></td></tr></table></figure>
+<h3 id="配置用户名和地址"><a href="#配置用户名和地址" class="headerlink" title="配置用户名和地址"></a>配置用户名和地址</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript">git config --<span class="hljs-variable language_">global</span> user.<span class="hljs-property">name</span> <span class="hljs-string">&quot;Your Name&quot;</span><br>git config --<span class="hljs-variable language_">global</span> user.<span class="hljs-property">email</span> <span class="hljs-string">&quot;youremail@example.com&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="四、clone源码包"><a href="#四、clone源码包" class="headerlink" title="四、clone源码包"></a>四、clone<a target="_blank" rel="noopener" href="https://gitlab.com/robocup-sim/SimSpark">源码包</a></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">git clone git@github.<span class="hljs-property">com</span>:zzufootball/<span class="hljs-variable constant_">SIMSPARK</span>.<span class="hljs-property">git</span><br></code></pre></td></tr></table></figure>
+<h2 id="五、Install"><a href="#五、Install" class="headerlink" title="五、Install"></a>五、Install</h2><p>打开主目录下的SIMSPARK文件夹，右键打开终端，执行命令：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">./build.<span class="hljs-property">sh</span><br></code></pre></td></tr></table></figure>
+<h2 id="六、Run"><a href="#六、Run" class="headerlink" title="六、Run"></a>六、Run</h2><p>在桌面Ctrl+Alt+T打开终端输入命令：<br>(平台打开则安装成功)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">rcsoccersim3d<br></code></pre></td></tr></table></figure>
+<h2 id="七、更换监视器"><a href="#七、更换监视器" class="headerlink" title="七、更换监视器"></a>七、更换<a target="_blank" rel="noopener" href="https://github.com/magmaOffenburg/RoboViz">监视器</a></h2><h3 id="1、安装JDK-1-8"><a href="#1、安装JDK-1-8" class="headerlink" title="1、安装JDK 1.8"></a>1、安装JDK 1.8</h3><p>打开终端输入命令：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript">sudo apt-cache search jdk<br>sudo apt-get install openjdk-<span class="hljs-number">8</span>-jdk<br></code></pre></td></tr></table></figure>
+<h3 id="2、clone源码包"><a href="#2、clone源码包" class="headerlink" title="2、clone源码包"></a>2、clone源码包</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">git clone <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/magmaOffenburg/RoboViz.git</span><br></code></pre></td></tr></table></figure>
+<p><em>若VM虚拟机网速过慢可以先安装VMware Tools，在Windows系统下载<a target="_blank" rel="noopener" href="https://github.com/magmaOffenburg/RoboViz">源码包</a>再复制到Linux系统中进行解压</em></p>
+<h3 id="3、安装"><a href="#3、安装" class="headerlink" title="3、安装"></a>3、安装</h3><p>打开解压过的Roboviz-master文件夹中的scripts目录，右键打开终端，输入命令：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">./build.<span class="hljs-property">sh</span><br></code></pre></td></tr></table></figure>
+<h3 id="4、更改配置文件"><a href="#4、更改配置文件" class="headerlink" title="4、更改配置文件"></a>4、更改配置文件</h3><p>继续输入命令<code>sudo gedit /usr/local/bin/rcsoccersim3d</code>，打开一个记事本，找到第27行，修改路径将<code>MON</code>路径换成<code>/home/用户名/Roboviz-master/bin/roboviz.sh</code>，接着在第二行加一句<code>cd /home/用户名/Roboviz-master/bin</code>，这里路径中的文件名都要以最新的文件名为标准灵活修改<br></p>
+<h3 id="5、Run"><a href="#5、Run" class="headerlink" title="5、Run"></a>5、Run</h3><p>(重新执行步骤六，这时监视器已换成<code>Roboviz</code>)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">rcsoccersim3d<br></code></pre></td></tr></table></figure>
+
+<h2 id="更换模式"><a href="#更换模式" class="headerlink" title="更换模式"></a>更换模式</h2><h3 id="切换到优化模式"><a href="#切换到优化模式" class="headerlink" title="切换到优化模式"></a>切换到优化模式</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">./scripts/simspark_optimize_mode.<span class="hljs-property">sh</span><br></code></pre></td></tr></table></figure>
+<h3 id="切换到正常模式"><a href="#切换到正常模式" class="headerlink" title="切换到正常模式"></a>切换到正常模式</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">./scripts/simspark_normal_mode.<span class="hljs-property">sh</span>  <br></code></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/magmaOffenburg">magmaOffenburg</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/LARG/utaustinvilla3d">utaustinvilla3d</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Robocup-3D/">Robocup_3D</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Robocup-3D/Linux/">Linux</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8E%9F%E5%88%9B/">原创</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/04/25/%E8%80%83%E7%A0%94%E7%BB%8F%E9%AA%8C%E5%B8%96/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">考研经验帖</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/09/Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+                        <span class="hidden-mobile">Github搭建个人博客</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"SDyU8a9obMBJPxY9L4M78Sma-gzGzoHsz","appKey":"yNtcutBypql5GNod5xsWmVhw","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
